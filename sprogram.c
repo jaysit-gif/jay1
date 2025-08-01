@@ -23,7 +23,9 @@ float distance(point p1,point p2){
 
 int main(void){
     point p1;
-    p1 = create_point(2.0,3.0);/**isnt this new version nice??? */
+    float x,y;
+    scanf("%f %f",&x,&y);
+    p1 = create_point(x,y);/**isnt this new version nice??? */
     printf("%.6f\n",distance(p1,origin));
     return 0;
 }
