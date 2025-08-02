@@ -25,7 +25,7 @@ int main(void){
     point p1;
     float x,y;
     scanf("%f %f",&x,&y);
-    p1 = create_point(x,y);/**isnt this new version nice??? */
+    p1 = create_point(x,y);
     printf("%.6f\n",distance(p1,origin));
     return 0;
 }
