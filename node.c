@@ -18,17 +18,10 @@ node *createnode(int val){
     return newnode;
 }
 
-node insertatbeg(node** head,int val){
-    node *newnode = createnode(val);
-    if(*head == NULL){
-        *head = newnode;
-        return;
-    }
-    node *temp = *head;
-    while(temp->next != NULL){
-        temp = temp->next;
-    }
-    temp->next = newnode;
+void insertAtBeginning(node** head, int value) {
+    node* newNode = createnode(value);
+    newNode->next = *head;  // Point new node to current head
+    *head = newNode;        // Update head to new node
 }
 
 void insertAtEnd(node** head, int value) {
@@ -49,7 +42,7 @@ void insertAtPosition(node** head, int value, int position) {
         printf("Invalid position\n");
         return;
     }
-    node* newNode = createNode(value);
+    node* newNode = createnode(value);
     if (position == 1) {
         newNode->next = *head;
         *head = newNode;
