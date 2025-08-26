@@ -4,6 +4,7 @@
 int *factors(int a){
     if(a<= 1){
         fprintf(stderr,"\nINVALID ARGUMENTS\n");
+        return NULL;
     }
     int *factarray = NULL;
     int N = 1;
@@ -41,7 +42,6 @@ void printfactors(int s){
 }
 
 int main(int argc,char *argv[]){
-
     if (argc < 2) {
         printf("Usage: %s <positive_integer>\n", argv[0]);
         printf("Example: %s 12\n", argv[0]);
