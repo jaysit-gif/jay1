@@ -49,7 +49,10 @@ int main(int argc,char *argv[]){
     }
     if(argc > 1){
         s = atoi(argv[1]);
+        for(int i = 1;i<=argc-1;i++){
+          s = atoi(argv[i]);
+          printfactors(s);
+        }
     }
-    printfactors(s);
     return 0;
 }
