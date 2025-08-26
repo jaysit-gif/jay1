@@ -39,19 +39,17 @@ void printfactors(int s){
     printf("%d\n",factor[i]);
     free(factor);
 }
-//is this ok??
+
 int main(int argc,char *argv[]){
-    int s;
+
     if (argc < 2) {
         printf("Usage: %s <positive_integer>\n", argv[0]);
         printf("Example: %s 12\n", argv[0]);
         return 1;
     }
     if(argc > 1){
-        s = atoi(argv[1]);
         for(int i = 1;i<=argc-1;i++){
-          s = atoi(argv[i]);
-          printfactors(s);
+          printfactors(atoi(argv[i]));
         }
     }
     return 0;
