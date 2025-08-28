@@ -27,6 +27,8 @@ int *factors(int a) {
     return factarray;
 }
 
+int nofactors(int s);
+
 void printfactors(int s) {
     int *factor = factors(s);
     int i = 0;
@@ -45,9 +47,10 @@ void printfactors(int s) {
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        printf("Usage: %s <positive_integer> ... or -hcf <int1> <int2>\n", argv[0]);
-        printf("Example: %s 12\n", argv[0]);
+        printf("Usage: %s <int1 int2 int3...> ... or -hcf <int1> <int2>>.. or -nf <positive_integer>\n", argv[0]);
+        printf("Example: %s 12 13 15 20\n", argv[0]);
         printf("Example: %s -hcf 12 18\n", argv[0]);
+        printf("Example: %s -nf 12\n", argv[0]);
         return 1;
     }
     for (int i = 1; i < argc; ) {  // Note: i incremented dynamically
@@ -64,7 +67,18 @@ int main(int argc, char *argv[]) {
             }
             printf("HCF: %d\n", HCF);
             i += 3;  // Skip flag + two args
-        } else {
+        }
+        else if(argv[i][0] == '-' && strcmp(argv[i],"-nf")==0){
+            if(i+1>=argc){
+                fprintf(stderr,"ERROR: -nf reqiures 1 integer");
+                return 1;
+            }
+
+            int n_f = atoi(argv[i+1]);
+            printf("NUMBER OF FACTORS: %d\n",nofactors(n_f));
+            i += 2;
+        }
+         else {
             printfactors(atoi(argv[i]));
             i++;
         }
@@ -92,9 +106,9 @@ int hcf(int a, int b) {
     int *commonfactor = NULL;
     int N = 1;
     int i = 0;
-    while (arraya[i] != (a > b ? a : b)) {  // Use max(a,b) as sentinel
-        int j = 0;  // Reset j each time
-        while (arrayb[j] != (a > b ? b : a)) {  // Use min(a,b) as sentinel
+    while (arraya[i] != (a > b ? a : b)) {  
+        int j = 0;  
+        while (arrayb[j] != (a > b ? b : a)) {  
             if (arraya[i] == arrayb[j]) {
                 int k = arraya[i];
                 int *array = realloc(commonfactor, N * sizeof(int));
@@ -118,4 +132,18 @@ int hcf(int a, int b) {
     free(arrayb);
     free(commonfactor);
     return result;
+}
+
+int nofactors(int s){
+    int *fact = factors(s);
+    int i = 0;
+    while(1){
+        int a = *(fact+i);
+        if(a == s){
+            break;
+        }
+        i++;
+    }
+    free(fact);
+    return i+1;
 }
