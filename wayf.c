@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int hcf(int a, int b);
-
+int hcf(int a,int b);
 int *factors(int a) {
     if (a <= 1) {
         fprintf(stderr, "\nINVALID ARGUMENTS\n");
@@ -61,7 +60,7 @@ int main(int argc, char *argv[]) {
             }
             int a = atoi(argv[i + 1]);
             int b = atoi(argv[i + 2]);
-            int HCF = hcf(a, b);
+            int HCF = hcf_e(a, b);
             if (HCF == -1) {
                 return 1;  // Error already printed
             }
@@ -86,53 +85,7 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-int hcf(int a, int b) {
-    int *arraya = NULL;
-    int *arrayb = NULL;
-    if (a > b) {
-        arraya = factors(a);
-        arrayb = factors(b);
-    } else if (a < b) {
-        arraya = factors(b);
-        arrayb = factors(a);
-    } else {
-        return a;
-    }
-    if (arraya == NULL || arrayb == NULL) {
-        free(arraya);
-        free(arrayb);
-        return -1;
-    }
-    int *commonfactor = NULL;
-    int N = 1;
-    int i = 0;
-    while (arraya[i] != (a > b ? a : b)) {  
-        int j = 0;  
-        while (arrayb[j] != (a > b ? b : a)) {  
-            if (arraya[i] == arrayb[j]) {
-                int k = arraya[i];
-                int *array = realloc(commonfactor, N * sizeof(int));
-                if (array == NULL) {
-                    fprintf(stderr, "mem allocation failed at hcf module\n");
-                    free(commonfactor);
-                    free(arraya);
-                    free(arrayb);
-                    return -1;
-                }
-                commonfactor = array;
-                commonfactor[N - 1] = k;
-                N++;
-            }
-            j++;
-        }
-        i++;
-    }
-    int result = (N > 1) ? commonfactor[N - 2] : 1;  // Last common (largest), N-2 since N++ after last add
-    free(arraya);
-    free(arrayb);
-    free(commonfactor);
-    return result;
-}
+
 
 int nofactors(int s){
     int *fact = factors(s);
@@ -146,4 +99,13 @@ int nofactors(int s){
     }
     free(fact);
     return i+1;
+}
+
+int hcf(int a,int b){
+    while(b != 0){
+        int temp = b;
+        b = a%b;
+        a = temp;
+    }
+    return a;
 }
