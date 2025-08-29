@@ -47,7 +47,7 @@ void printfactors(int s) {
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        printf("Usage: %s <int1 int2 int3...> ... or -hcf <int1> <int2>>.. or -nf <positive_integer>\n", argv[0]);
+        printf("Usage: %s <int1 int2 int3...> ... or -hcf <<int1> <int2>>.. or -nf <positive_integer>\n", argv[0]);
         printf("Example: %s 12 13 15 20\n", argv[0]);
         printf("Example: %s -hcf 12 18\n", argv[0]);
         printf("Example: %s -nf 12\n", argv[0]);
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
             }
 
             int n_f = atoi(argv[i+1]);
-            printf("NUMBER OF FACTORS: %d\n",nofactors(n_f));
+            printf("NUMBER OF FACTORS OF (%d): %d\n",n_f,nofactors(n_f));
             i += 2;
         }
          else {
