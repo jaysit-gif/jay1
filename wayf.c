@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
             }
             int a = atoi(argv[i + 1]);
             int b = atoi(argv[i + 2]);
-            int HCF = hcf_e(a, b);
+            int HCF = hcf(a, b);
             if (HCF == -1) {
                 return 1;  // Error already printed
             }
