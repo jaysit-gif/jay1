@@ -1,24 +1,35 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main(void){
-    int arr[] = {2,3,4,5,6,7,8};
-    for(int i = 0;i<= sizeof(arr)/sizeof(int);i++){
-        printf("%d\t",arr[i]);
-        if(arr[i]  == 7){
-            break;
+int *factors(int a) {
+    if (a <= 1) {
+        fprintf(stderr, "\nINVALID ARGUMENTS\n");
+        return NULL;
+    }
+    int *factarray = NULL;
+    int N = 1;
+    for (int i = 1; i <= a; i++) {
+        if (a % i == 0) {
+            int *array = realloc(factarray, N * sizeof(int));
+            if (array == NULL) {
+                fprintf(stderr, "MEM ALLOCATION FAILED\n");
+                free(factarray);
+                return NULL;
+            }
+            factarray = array;
+            factarray[N - 1] = i;
+            N++;
         }
     }
-    printf("\n");
-    int i = 0;
-    while(arr[i] != 7){
-        printf("%d\t",arr[i]);
-        i++;
-    }
-    printf("\n");
+    return factarray;
+}
 
-    int j = 0;
-    do{
-        printf("%d\t",arr[j]);
-        j++;
-    }while(arr[j] != 7);
+
+int main(void){
+    int *arr = factors(96);int o = 10;
+    int *p = &o;
+    printf("%zu\n",sizeof(arr));
+    printf("%zu",sizeof(p));
+    free(arr);
+    return 0;
 }

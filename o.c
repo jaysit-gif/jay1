@@ -10,18 +10,18 @@ void printarray(int *arr,size_t N){
 }
 
 int main(void){
-    int *t = NULL;
-    int *a = (int *)malloc(5*sizeof(int));
-    a[0] = 1; a[1] = 2; a[2] = 4; a[3]=5;a[4] = 2; 
-    int *p = &a[0];
-    printf("%d\n",p);
-    printf("%d\n",*p);
-    *(p+2) = 0;//so does it mean realloc works on heap allocated variables??
-    printarray(a,5);
-    t = (int*)realloc(a,6*sizeof(int));
-    a = t;
-    a[5] = 10;
-    printarray(a,6);
-    free(a);
+    int N;
+    printf("N: ");/*cant i make a fuction which returns arrays*/
+    scanf("%d",&N); 
+    int *t = (int*)malloc(N*sizeof(int));
+    if(t == NULL){
+        perror("MEM ALLOCATION FAILED");
+    }
+    for(int i = 0;i<N;i++){
+        printf("T[%d]: ",i+1);
+        scanf("%d",&t[i]);
+    }
+    printarray(t,N);
+    free(t);
     return 0;
 }
